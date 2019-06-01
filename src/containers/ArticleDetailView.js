@@ -19,7 +19,7 @@ class ArticleDetail extends React.Component{
                 Authorization: newProps.token
             }
             const articleID = this.props.match.params.articleID;
-            axios.get(`https://coastalcoding.herokuapp.com/api/${articleID}/`)
+            axios.get(`https://coastalcoding.org/api/${articleID}/`)
             .then(res => {
                 this.setState({
                     article: res.data
@@ -37,7 +37,7 @@ class ArticleDetail extends React.Component{
                 Authorization: this.props.token
             }
     
-            axios.delete(`https://coastalcoding.herokuapp.com/api/${articleID}/delete/`);
+            axios.delete(`https://coastalcoding.org/api/${articleID}/delete/`);
             this.props.history.push('/');
             this.forceUpdate();
         } else {

@@ -13,7 +13,7 @@ SECRET_KEY = 'd+7()zsu81zp6^h6!mul*04_^#_+zmw+b#y1nd4t_q9*d&a2r6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['coastalcoding.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['coastalcoding.org', 'coastalcoding.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
