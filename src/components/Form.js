@@ -13,13 +13,13 @@ class CustomForm extends React.Component {
 
         switch ( requestType ) {
             case 'post':
-                return axios.post('http://127.0.0.1:8000/api/', {
+                return axios.post('https://coastalcoding.herokuapp.com/api/', {
                     title: title,
                     content: content
                 }).then(res => console.log(res))
                 .catch(error => console.error(error));
             case 'put':
-                return axios.put(`http://127.0.0.1:8000/api/${articleID}/`, {
+                return axios.put(`https://coastalcoding.herokuapp.com/api/${articleID}/`, {
                     title: title,
                     content: content
                 }).then(res => console.log(res))
