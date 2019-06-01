@@ -13,7 +13,7 @@ SECRET_KEY = 'd+7()zsu81zp6^h6!mul*04_^#_+zmw+b#y1nd4t_q9*d&a2r6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['coastalcoding.herokuapp.com']
+ALLOWED_HOSTS = ['coastalcoding.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
@@ -132,12 +132,14 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
-    'DEFAULT_PERMISSION_CLASSES': [
-        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-        'rest_framework.permissions.AllowAny'
-    ]
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),   
 }
 
 CORS_ORIGIN_ALLOW_ALL = True

@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
 import { Card, Button } from 'antd';
 
@@ -11,23 +12,39 @@ class ArticleDetail extends React.Component{
         article: {}
     }
 
-    componentDidMount() {
-        const articleID = this.props.match.params.articleID;
-
-        axios.get(`https://coastalcoding.herokuapp.com/api/${articleID}/`)
+    componentWillReceiveProps(newProps) {
+        if(newProps.token){
+            axios.defaults.headers = {
+                "Content-Type": "application/json",
+                Authorization: newProps.token
+            }
+            const articleID = this.props.match.params.articleID;
+            axios.get(`https://coastalcoding.herokuapp.com/api/${articleID}/`)
             .then(res => {
                 this.setState({
                     article: res.data
                 });
             })
+        }
     }
 
     handleDelete = (event) => {
-        const articleID = this.props.match.params.articleID;
+        if(this.props.token !== null) {
+            const articleID = this.props.match.params.articleID;
 
-        axios.delete(`https://coastalcoding.herokuapp.com/api/${articleID}/delete/`);
-        this.props.history.push('/');
-        this.forceUpdate();
+            axios.defaults.headers = {
+                "Content-Type": "application/json",
+                Authorization: this.props.token
+            }
+    
+            axios.delete(`https://coastalcoding.herokuapp.com/api/${articleID}/delete/`);
+            this.props.history.push('/');
+            this.forceUpdate();
+        } else {
+
+        }
+
+
     }
 
     render() {
@@ -48,4 +65,10 @@ class ArticleDetail extends React.Component{
     }
 }
 
-export default ArticleDetail;
+const mapStateToProps = state => {
+    return {
+      token: state.token
+    }
+  }
+
+export default connect(mapStateToProps)(ArticleDetail);

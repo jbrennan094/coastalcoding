@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form, Input, Button} from 'antd';
+import { connect } from 'react-redux';
 
 import axios from 'axios';
 
@@ -10,6 +11,11 @@ class CustomForm extends React.Component {
     handleFormSubmit = (event, requestType,articleID) => {
         const title = event.target.elements.title.value;
         const content = event.target.elements.content.value;
+
+        axios.defaults.headers = {
+            "Content-Type": "application/json",
+            Authorization: this.props.token
+        }
 
         switch ( requestType ) {
             case 'post':
@@ -50,4 +56,10 @@ class CustomForm extends React.Component {
     }
 }
 
-export default CustomForm;
+const mapStateToProps = state => {
+    return {
+      token: state.token
+    }
+  }
+
+export default connect(mapStateToProps)(CustomForm);
