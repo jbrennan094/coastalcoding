@@ -14,7 +14,7 @@ class ArticleDetail extends React.Component{
     componentDidMount() {
         const articleID = this.props.match.params.articleID;
 
-        axios.get(`https://coastalcoding.herokuapp.com/api/${articleID}`)
+        axios.get(`https://coastalcoding.herokuapp.com/api/${articleID}/`)
             .then(res => {
                 this.setState({
                     article: res.data
